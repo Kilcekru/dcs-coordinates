@@ -1,0 +1,9 @@
+/node_modules
+/dist
+
+/.eslintignore
+/.prettierignore
+/.gitignore
+/pnpm-lock.yaml
+
+*.md
