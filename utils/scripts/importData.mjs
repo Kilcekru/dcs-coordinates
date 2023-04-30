@@ -15,28 +15,11 @@ async function main() {
 		}
 		const coords = JSON.parse(await readFile(Path.join(srcDir, file)));
 
-		const res = { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity, coords };
+		const res = {};
 		for (const [x, entry] of Object.entries(coords)) {
-			const xNum = Number.parseInt(x);
-			if (xNum < res.minX) {
-				res.minX = xNum;
-			}
-			if (xNum > res.maxX) {
-				res.maxX = xNum;
-			}
-			res.coords[x] = {};
+			res[x] = {};
 			for (const [z, c] of Object.entries(entry)) {
-				const zNum = Number.parseInt(z);
-				if (zNum < res.minZ) {
-					res.minZ = zNum;
-				}
-				if (zNum > res.maxZ) {
-					res.maxZ = zNum;
-				}
-				res.coords[x][z] = {
-					lat: round(c.lat, 6),
-					lon: round(c.lon, 6),
-				};
+				res[x][z] = [round(c.lat, 6), round(c.lon, 6)];
 			}
 		}
 

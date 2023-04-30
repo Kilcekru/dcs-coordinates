@@ -1,6 +1,6 @@
 # dcs-coordinates
 
-Parse from and stringify to lua-tables.
+Convert coordinates between DCS internal coordinates and Latitude / Longitude
 
 Typings and ts-doc are included.
 
@@ -13,9 +13,9 @@ Typings and ts-doc are included.
 
 ## License
 
-Licensed under [MIT](https://github.com/Kilcekru/lua-table/blob/main/LICENSE).
+Licensed under [MIT](https://github.com/Kilcekru/dcs-coordinates/blob/main/LICENSE).
 
 ## Changelog
 
-- v1.0.0
+- v0.1.0
 	- Initial Release

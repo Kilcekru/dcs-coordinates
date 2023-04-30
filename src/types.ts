@@ -9,5 +9,5 @@ export interface DcsCoords {
 }
 
 export interface MapName {
-	map: string;
+	map: "caucasus" | "normandy";
 }
