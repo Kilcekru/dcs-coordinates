@@ -13,14 +13,22 @@ async function main() {
 		if (!file.endsWith(".json")) {
 			continue;
 		}
-		const coords = JSON.parse(await readFile(Path.join(srcDir, file)));
+		const grid = JSON.parse(await readFile(Path.join(srcDir, file)));
 
-		const res = {};
-		for (const [x, entry] of Object.entries(coords)) {
-			res[x] = {};
-			for (const [z, c] of Object.entries(entry)) {
-				res[x][z] = [round(c.lat, 6), round(c.lon, 6)];
+		const res = { minX: grid.minX, minZ: grid.minZ, minLat: grid.minLat, minLng: grid.minLng, lo: [], ll: [] };
+		for (const entry of grid.lo) {
+			const tmp = [];
+			for (const c of entry) {
+				tmp.push([round(c[0], 6), round(c[1], 6)]);
 			}
+			res.lo.push(tmp);
+		}
+		for (const entry of grid.ll) {
+			const tmp = [];
+			for (const c of entry) {
+				tmp.push([Math.round(c[0]), Math.round(c[1])]);
+			}
+			res.ll.push(tmp);
 		}
 
 		await writeFile(Path.join(targetDir, file), JSON.stringify(res, undefined, "\t"));
@@ -29,7 +37,7 @@ async function main() {
 
 export function round(num, decimals) {
 	const abs = Math.abs(num);
-	if (abs < 0.1) {
+	if (abs < 1e-6) {
 		return 0;
 	}
 	const res = Math.sign(num) * +(Math.round(+(abs.toString() + `e+${decimals}`)).toString() + `e-${decimals}`);

@@ -1,6 +1,6 @@
 {
 	"name": "@kilcekru/dcs-coordinates",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Convert coordinates between dcs and lat/long",
 	"keywords": [
 		"dcs"
@@ -31,7 +31,7 @@
 		"clean": "rm -rf dist",
 		"clean:all": "rm -rf dist node_modules",
 		"dev": "tsup --config utils/build/tsup.config.js --watch",
-		"lint": "eslint src",
+		"lint": "eslint src test",
 		"prepack": "pnpm validate && pnpm lint && pnpm prettier && pnpm test && pnpm build",
 		"prepare": "husky install utils/husky",
 		"prettier": "prettier --write .",

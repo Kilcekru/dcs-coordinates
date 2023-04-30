@@ -8,6 +8,13 @@ export interface DcsCoords {
 	z: number;
 }
 
-export interface MapName {
-	map: "caucasus" | "normandy";
-}
+export type MapName = "caucasus" | "normandy";
+
+export type Grid = {
+	minX: number;
+	minZ: number;
+	minLat: number;
+	minLng: number;
+	lo: Array<Array<[number, number]>>;
+	ll: Array<Array<[number, number]>>;
+};

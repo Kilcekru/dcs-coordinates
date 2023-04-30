@@ -4,6 +4,9 @@ function linearInterpolation({ x, x1, x2, y1, y2 }: LinearInterpolationArgs): nu
 
 export function bilinearInterpolation(args: BilinearInterpolationArgs): number {
 	return linearInterpolation({
+		x: args.y,
+		x1: args.y1,
+		x2: args.y2,
 		y1: linearInterpolation({
 			x: args.x,
 			x1: args.x1,
@@ -18,9 +21,6 @@ export function bilinearInterpolation(args: BilinearInterpolationArgs): number {
 			y1: args.v12,
 			y2: args.v22,
 		}),
-		x: args.y,
-		x1: args.y1,
-		x2: args.y2,
 	});
 }
 
