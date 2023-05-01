@@ -2,8 +2,16 @@ import { data } from "./data";
 import { bilinearInterpolation } from "./math";
 import { DcsCoords, LatLng, MapName } from "./types";
 
+export * from "./utils";
+
 /**
- * Converts DCS coordinates to Lat / Lng
+ * Converts DCS coordinates to Lat / Lng (decimal)
+ *
+ * @param map Name of the map the coordinates are on
+ * @param x x coordinate of the point to convert
+ * @param z z coordinate of the point to convert
+ *
+ * @returns Latitude and Longitude
  */
 export function LOtoLL({ map, x, z }: { map: MapName } & DcsCoords): LatLng {
 	const grid = data[map];
@@ -55,7 +63,13 @@ export function LOtoLL({ map, x, z }: { map: MapName } & DcsCoords): LatLng {
 }
 
 /**
- * Converts Lat / Long to DCS coordinates
+ * Converts Lat / Long (decimal) to DCS coordinates
+ *
+ * @param map Name of the map the coordinates are on
+ * @param lat Latitude of the coordinates to convert
+ * @param lng Longitude of the coordinates to convert
+ *
+ * @returns x and z coordinates
  */
 export function LLtoLO({ map, lat, lng }: { map: MapName } & LatLng): DcsCoords {
 	const grid = data[map];
