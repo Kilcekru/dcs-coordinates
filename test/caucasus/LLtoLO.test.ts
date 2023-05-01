@@ -2,7 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 
 import { LLtoLO } from "../../src";
 
-describe.only("caucasus", () => {
+describe("caucasus", () => {
 	describe("LLtoLO", () => {
 		test("lat too small", () => {
 			expect(() => LLtoLO({ map: "caucasus", lat: 40.8999, lng: 40 })).toThrow(

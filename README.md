@@ -16,6 +16,7 @@ Typings and ts-doc are included.
 - [How it works](#how-it-works)
 	- [Method](#method)
 	- [Accuracy](#accuracy)
+	- [Supported Maps](#supported-maps)
 - [License](#license)
 - [Changelog](#changelog)
 
@@ -52,7 +53,7 @@ console.log(point);
 ### LOtoLL
 ```typescript
 LOtoLL({map: MapName, x: number, z: number}): {lat: number, lng: number};
-type MapName = "caucasus" | "normandy";
+type MapName = "caucasus" | "normandy" | "syria";
 ```
 
 Converts a point from DCS coordinates to Latitude / Longitude (decimal).\
@@ -61,7 +62,7 @@ The result is not perfect, see [Accuracy](#accuracy)
 ### LLtoLO
 ```typescript
 LLtoLO({map: MapName, lat: number, lng: number}): {x: number, z: number};
-type MapName = "caucasus" | "normandy";
+type MapName = "caucasus" | "normandy" | "syria";
 ```
 
 Converts a point from Latitude / Longitude (decimal) to DCS coordinates.\
@@ -98,8 +99,10 @@ Converts Latitude or Longitude from degrees, minutes, seconds to a decimal value
 I do not know the exact way, Lat/Lng is mapped to internal coordinates in DCS.
 
 Because of this, a grid of coordinate points is extracted from each DCS Map.\
-To convert a point the correct grid cell is selected and the result is interpolated from the cell corners.
+The grid does not cover the whole map, but all airports are included.\
+Points outside the grid can not be converted, trying so will throw an Error.
 
+To convert a point the correct grid cell is selected and the result is interpolated from the cell corners.\
 This leads to inaccuracy, see next chapter.
 
 ### Accuracy
@@ -110,6 +113,15 @@ The deviation should be less than 10 meters for any given point.
 Also LOtoLL and LLtoLO use different lookup grids.
 If a point is converted from one coordinate system to the other and back it will not be exact.\
 The deviation for this is less than 3 meters for all maps.
+
+### Supported Maps
+
+Currently 3 Maps are supported:
+- Caucasus
+- Normandy
+- Syria
+
+More maps might be covered in the future.
 
 ## License
 

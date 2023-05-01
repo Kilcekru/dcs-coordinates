@@ -2,7 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 
 import { LLtoLO, LOtoLL } from "../../src";
 
-describe.only("normandy", () => {
+describe("normandy", () => {
 	test("accuracy", () => {
 		for (let x = -125_000; x <= 245_000; x += 5000) {
 			for (let z = -145_000; z <= 215_000; z += 5000) {
