@@ -53,7 +53,7 @@ console.log(point);
 ### LOtoLL
 ```typescript
 LOtoLL({map: MapName, x: number, z: number}): {lat: number, lng: number};
-type MapName = "caucasus" | "normandy" | "syria";
+type MapName = "caucasus" | "normandy" | "persianGulf" | "syria";
 ```
 
 Converts a point from DCS coordinates to Latitude / Longitude (decimal).\
@@ -62,7 +62,7 @@ The result is not perfect, see [Accuracy](#accuracy)
 ### LLtoLO
 ```typescript
 LLtoLO({map: MapName, lat: number, lng: number}): {x: number, z: number};
-type MapName = "caucasus" | "normandy" | "syria";
+type MapName = "caucasus" | "normandy" | "persianGulf" | "syria";
 ```
 
 Converts a point from Latitude / Longitude (decimal) to DCS coordinates.\
@@ -116,9 +116,10 @@ The deviation for this is less than 3 meters for all maps.
 
 ### Supported Maps
 
-Currently 3 Maps are supported:
+Currently 4 Maps are supported:
 - Caucasus
 - Normandy
+- Persian Gulf
 - Syria
 
 More maps might be covered in the future.

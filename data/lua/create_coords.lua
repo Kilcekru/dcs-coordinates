@@ -14,18 +14,6 @@ do
 		maxLng = 460,
 	}
 
-	local syria = {
-		name = "syria",
-		minX = -31,
-		maxX = 28,
-		minZ = -33,
-		maxZ = 40,
-		minLat = 320,
-		maxLat = 376,
-		minLng = 320,
-		maxLng = 404,
-	}
-
 	local normandy = {
 		name = "normandy",
 		minX = -13,
@@ -38,8 +26,32 @@ do
 		maxLng = 30,
 	}
 
+	local persianGulf = {
+		name = "persianGulf",
+		minX = -29,
+		maxX = 47,
+		minZ = -37,
+		maxZ = 17,
+		minLat = 234,
+		maxLat = 305,
+		minLng = 523,
+		maxLng = 580,
+	}
+
+	local syria = {
+		name = "syria",
+		minX = -31,
+		maxX = 28,
+		minZ = -33,
+		maxZ = 40,
+		minLat = 320,
+		maxLat = 376,
+		minLng = 320,
+		maxLng = 404,
+	}
+
 	local function exportGrid()
-		local config = syria -- change to correct table
+		local config = persianGulf -- change to correct table
 
 		local grid = {
 			minX = config.minX,

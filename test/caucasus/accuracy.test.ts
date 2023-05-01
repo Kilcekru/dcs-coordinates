@@ -4,6 +4,7 @@ import { LLtoLO, LOtoLL } from "../../src";
 
 describe("caucasus", () => {
 	test("accuracy", () => {
+		expect.assertions(25810);
 		for (let x = -395_000; x <= 45_000; x += 5000) {
 			for (let z = 205_000; z <= 925_000; z += 5000) {
 				const { lat, lng } = LOtoLL({ map: "caucasus", x, z });
