@@ -38,6 +38,18 @@ do
 		maxLng = 580,
 	}
 
+	local southAtlantic = {
+		name = "southAtlantic",
+		minX = -50,
+		maxX = 35,
+		minZ = -110,
+		maxZ = 20,
+		minLat = -570,
+		maxLat = -481,
+		minLng = -769,
+		maxLng = -561,
+	}
+
 	local syria = {
 		name = "syria",
 		minX = -31,

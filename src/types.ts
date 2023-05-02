@@ -8,7 +8,7 @@ export interface DcsCoords {
 	z: number;
 }
 
-export type MapName = "caucasus" | "normandy" | "persianGulf" | "syria";
+export type MapName = "caucasus" | "normandy" | "persianGulf" | "southAtlantic" | "syria";
 
 export type Grid = {
 	minX: number;
