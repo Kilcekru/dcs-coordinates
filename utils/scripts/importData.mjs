@@ -2,12 +2,15 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import * as Path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import prettier from "prettier";
+
 const dirname = Path.dirname(fileURLToPath(import.meta.url));
 
 const srcDir = Path.join(dirname, "../../data/grid");
 const targetDir = Path.join(dirname, "../../src/data");
 
 async function main() {
+	const prettierConfig = await prettier.resolveConfig(targetDir);
 	const files = await readdir(srcDir);
 	for (const file of files) {
 		if (!file.endsWith(".json")) {
@@ -31,7 +34,10 @@ async function main() {
 			res.ll.push(tmp);
 		}
 
-		await writeFile(Path.join(targetDir, file), JSON.stringify(res, undefined, "\t"));
+		await writeFile(
+			Path.join(targetDir, file),
+			prettier.format(JSON.stringify(res, undefined, "\t"), { ...prettierConfig, parser: "json" })
+		);
 	}
 }
 
