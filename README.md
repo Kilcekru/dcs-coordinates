@@ -2,7 +2,8 @@
 
 Convert coordinates between DCS internal coordinates and Latitude / Longitude
 
-Typings and ts-doc are included.
+Typings and ts-doc are included.\
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 - [Installation](#installation)
 - [Usage](#usage)
