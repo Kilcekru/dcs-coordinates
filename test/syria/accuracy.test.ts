@@ -4,9 +4,9 @@ import { LLtoLO, LOtoLL } from "../../src";
 
 describe("syria", () => {
 	test("accuracy", () => {
-		expect.assertions(33930);
-		for (let x = -305_000; x <= 275_000; x += 5000) {
-			for (let z = -325_000; z <= 395_000; z += 5000) {
+		expect.assertions(44720);
+		for (let x = -340_000; x < 310_000; x += 5000) {
+			for (let z = -410_000; z < 450_000; z += 5000) {
 				const { lat, lng } = LOtoLL({ map: "syria", x, z });
 				const res = LLtoLO({ map: "syria", lat, lng });
 				expect(Math.abs(res.x - x)).toBeLessThan(3);
