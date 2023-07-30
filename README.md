@@ -133,6 +133,7 @@ Licensed under [MIT](https://github.com/Kilcekru/dcs-coordinates/blob/main/LICEN
 ## Changelog
 
 - v1.0.0
+  - added sinai
 	- increased boundaries for all maps
 
 - v0.1.0
