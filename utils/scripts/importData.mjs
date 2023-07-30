@@ -18,7 +18,7 @@ async function main() {
 		}
 		const grid = JSON.parse(await readFile(Path.join(srcDir, file)));
 
-		const res = { minX: grid.minX, minZ: grid.minZ, minLat: grid.minLat, minLng: grid.minLng, lo: [], ll: [] };
+		const res = { bounds: grid.bounds, ll: [], lo: [] };
 		for (const entry of grid.lo) {
 			const tmp = [];
 			for (const c of entry) {

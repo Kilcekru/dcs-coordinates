@@ -5,51 +5,51 @@ import { LLtoLO } from "../../src";
 describe("persianGulf", () => {
 	describe("LLtoLO", () => {
 		test("lat too small", () => {
-			expect(() => LLtoLO({ map: "persianGulf", lat: 23.3999, lng: 55 })).toThrow(
+			expect(() => LLtoLO({ map: "persianGulf", lat: 22.6999, lng: 55 })).toThrow(
 				new Error("Coordinates outside of acceptable area for persianGulf")
 			);
 		});
 
 		test("lat too big", () => {
-			expect(() => LLtoLO({ map: "persianGulf", lat: 30.5, lng: 55 })).toThrow(
+			expect(() => LLtoLO({ map: "persianGulf", lat: 31.2, lng: 55 })).toThrow(
 				new Error("Coordinates outside of acceptable area for persianGulf")
 			);
 		});
 
 		test("lng too small", () => {
-			expect(() => LLtoLO({ map: "persianGulf", lat: 27, lng: 52.2999 })).toThrow(
+			expect(() => LLtoLO({ map: "persianGulf", lat: 27, lng: 51.3999 })).toThrow(
 				new Error("Coordinates outside of acceptable area for persianGulf")
 			);
 		});
 
 		test("lng too big", () => {
-			expect(() => LLtoLO({ map: "persianGulf", lat: 27, lng: 58 })).toThrow(
+			expect(() => LLtoLO({ map: "persianGulf", lat: 27, lng: 58.9 })).toThrow(
 				new Error("Coordinates outside of acceptable area for persianGulf")
 			);
 		});
 
 		test("corner NE", () => {
-			const { x, z } = LLtoLO({ map: "persianGulf", lat: 30.4999, lng: 57.9999 });
-			expect(x).toBeCloseTo(479_673, 0);
-			expect(z).toBeCloseTo(171_710, 0);
+			const { x, z } = LLtoLO({ map: "persianGulf", lat: 31.1999, lng: 58.8999 });
+			expect(x).toBeCloseTo(558_379, 0);
+			expect(z).toBeCloseTo(256_768, 0);
 		});
 
 		test("corner SE", () => {
-			const { x, z } = LLtoLO({ map: "persianGulf", lat: 23.4, lng: 57.9999 });
-			expect(x).toBeCloseTo(-306_778, 0);
-			expect(z).toBeCloseTo(177_927, 0);
+			const { x, z } = LLtoLO({ map: "persianGulf", lat: 22.7, lng: 58.8999 });
+			expect(x).toBeCloseTo(-383_373, 0);
+			expect(z).toBeCloseTo(270_914, 0);
 		});
 
 		test("corner SW", () => {
-			const { x, z } = LLtoLO({ map: "persianGulf", lat: 23.4, lng: 52.3 });
-			expect(x).toBeCloseTo(-299_292, 0);
-			expect(z).toBeCloseTo(-404_848, 0);
+			const { x, z } = LLtoLO({ map: "persianGulf", lat: 22.7, lng: 51.4 });
+			expect(x).toBeCloseTo(-373_740, 0);
+			expect(z).toBeCloseTo(-500_049, 0);
 		});
 
 		test("corner NW", () => {
-			const { x, z } = LLtoLO({ map: "persianGulf", lat: 30.4999, lng: 52.3 });
-			expect(x).toBeCloseTo(488_655, 0);
-			expect(z).toBeCloseTo(-375_505, 0);
+			const { x, z } = LLtoLO({ map: "persianGulf", lat: 31.1999, lng: 51.4 });
+			expect(x).toBeCloseTo(570_366, 0);
+			expect(z).toBeCloseTo(-458_132, 0);
 		});
 
 		test("Shiraz", () => {

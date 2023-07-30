@@ -5,7 +5,7 @@ import { LLtoLO } from "../../src";
 describe("normandy", () => {
 	describe("LLtoLO", () => {
 		test("lat too small", () => {
-			expect(() => LLtoLO({ map: "normandy", lat: 48.1999, lng: 0 })).toThrow(
+			expect(() => LLtoLO({ map: "normandy", lat: 48.0999, lng: 0 })).toThrow(
 				new Error("Coordinates outside of acceptable area for normandy")
 			);
 		});
@@ -17,39 +17,39 @@ describe("normandy", () => {
 		});
 
 		test("lng too small", () => {
-			expect(() => LLtoLO({ map: "normandy", lat: 50, lng: -2.4001 })).toThrow(
+			expect(() => LLtoLO({ map: "normandy", lat: 50, lng: -3.1001 })).toThrow(
 				new Error("Coordinates outside of acceptable area for normandy")
 			);
 		});
 
 		test("lng too big", () => {
-			expect(() => LLtoLO({ map: "normandy", lat: 50, lng: 3 })).toThrow(
+			expect(() => LLtoLO({ map: "normandy", lat: 50, lng: 3.5 })).toThrow(
 				new Error("Coordinates outside of acceptable area for normandy")
 			);
 		});
 
 		test("corner NE", () => {
-			const { x, z } = LLtoLO({ map: "normandy", lat: 51.7999, lng: 2.9999 });
-			expect(x).toBeCloseTo(271_013, 0);
-			expect(z).toBeCloseTo(218_026, 0);
+			const { x, z } = LLtoLO({ map: "normandy", lat: 51.7999, lng: 3.4999 });
+			expect(x).toBeCloseTo(273_977, 0);
+			expect(z).toBeCloseTo(252_455, 0);
 		});
 
 		test("corner SE", () => {
-			const { x, z } = LLtoLO({ map: "normandy", lat: 48.2, lng: 2.9999 });
-			expect(x).toBeCloseTo(-128_854.5, 0);
-			expect(z).toBeCloseTo(250_216, 0);
+			const { x, z } = LLtoLO({ map: "normandy", lat: 48.1, lng: 3.4999 });
+			expect(x).toBeCloseTo(-136_931, 0);
+			expect(z).toBeCloseTo(288_287, 0);
 		});
 
 		test("corner SW", () => {
-			const { x, z } = LLtoLO({ map: "normandy", lat: 48.2, lng: -2.4 });
-			expect(x).toBeCloseTo(-146_109, 0);
-			expect(z).toBeCloseTo(-150_942, 0);
+			const { x, z } = LLtoLO({ map: "normandy", lat: 48.1, lng: -3.1 });
+			expect(x).toBeCloseTo(-157_393, 0);
+			expect(z).toBeCloseTo(-202_971, 0);
 		});
 
 		test("corner NW", () => {
-			const { x, z } = LLtoLO({ map: "normandy", lat: 51.7999, lng: -2.4 });
-			expect(x).toBeCloseTo(254_140, 0);
-			expect(z).toBeCloseTo(-154_153, 0);
+			const { x, z } = LLtoLO({ map: "normandy", lat: 51.7999, lng: -3.1 });
+			expect(x).toBeCloseTo(253_975, 0);
+			expect(z).toBeCloseTo(-202_422, 0);
 		});
 
 		test("Odiham", () => {

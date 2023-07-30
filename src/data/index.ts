@@ -10,5 +10,5 @@ export const data: Record<MapName, Grid> = {
 	normandy: normandy as Grid,
 	syria: syria as Grid,
 	persianGulf: persianGulf as Grid,
-	southAtlantic: southAtlantic as unknown as Grid,
+	southAtlantic: southAtlantic as Grid,
 };

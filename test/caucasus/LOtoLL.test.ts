@@ -5,51 +5,51 @@ import { LOtoLL } from "../../src";
 describe("caucasus", () => {
 	describe("LOtoLL", () => {
 		test("x too small", () => {
-			expect(() => LOtoLL({ map: "caucasus", x: -400_001, z: 500_000 })).toThrow(
+			expect(() => LOtoLL({ map: "caucasus", x: -450_001, z: 500_000 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("x too big", () => {
-			expect(() => LOtoLL({ map: "caucasus", x: 50_000, z: 500_000 })).toThrow(
+			expect(() => LOtoLL({ map: "caucasus", x: 100_000, z: 500_000 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("z too small", () => {
-			expect(() => LOtoLL({ map: "caucasus", x: -200_000, z: 199_999 })).toThrow(
+			expect(() => LOtoLL({ map: "caucasus", x: -200_000, z: 149_999 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("z too big", () => {
-			expect(() => LOtoLL({ map: "caucasus", x: -200_000, z: 930_000 })).toThrow(
+			expect(() => LOtoLL({ map: "caucasus", x: -200_000, z: 1_000_000 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("corner NE", () => {
-			const { lat, lng } = LOtoLL({ map: "caucasus", x: 49_999, z: 929_999 });
-			expect(lat).toBeCloseTo(44.8373, 5);
-			expect(lng).toBeCloseTo(46.02564, 5);
+			const { lat, lng } = LOtoLL({ map: "caucasus", x: 99_999, z: 999_999 });
+			expect(lat).toBeCloseTo(45.17082, 5);
+			expect(lng).toBeCloseTo(46.99406, 5);
 		});
 
 		test("corner SE", () => {
-			const { lat, lng } = LOtoLL({ map: "caucasus", x: -400_000, z: 929_999 });
-			expect(lat).toBeCloseTo(40.88277, 5);
-			expect(lng).toBeCloseTo(45.20685, 5);
+			const { lat, lng } = LOtoLL({ map: "caucasus", x: -450_000, z: 999_999 });
+			expect(lat).toBeCloseTo(40.35381, 5);
+			expect(lng).toBeCloseTo(45.9308, 5);
 		});
 
 		test("corner SW", () => {
-			const { lat, lng } = LOtoLL({ map: "caucasus", x: -400_000, z: 200_000 });
-			expect(lat).toBeCloseTo(41.47871, 5);
-			expect(lng).toBeCloseTo(36.58716, 5);
+			const { lat, lng } = LOtoLL({ map: "caucasus", x: -450_000, z: 150_000 });
+			expect(lat).toBeCloseTo(41.04604, 5);
+			expect(lng).toBeCloseTo(35.96874, 5);
 		});
 
 		test("corner NW", () => {
-			const { lat, lng } = LOtoLL({ map: "caucasus", x: 49_999, z: 200_000 });
-			expect(lat).toBeCloseTo(45.52214, 5);
-			expect(lng).toBeCloseTo(36.83528, 5);
+			const { lat, lng } = LOtoLL({ map: "caucasus", x: 99_999, z: 150_000 });
+			expect(lat).toBeCloseTo(45.99116, 5);
+			expect(lng).toBeCloseTo(36.22193, 5);
 		});
 
 		test("Senaki-Kolkhi", () => {

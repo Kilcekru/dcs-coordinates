@@ -21,8 +21,8 @@ export function LOtoLL({ map, x, z }: { map: MapName } & DcsCoords): LatLng {
 
 	const gridX = Math.floor(x / 10000);
 	const gridZ = Math.floor(z / 10000);
-	const gridXIndex = gridX - grid.minX;
-	const gridZIndex = gridZ - grid.minZ;
+	const gridXIndex = gridX - grid.bounds.xMin;
+	const gridZIndex = gridZ - grid.bounds.zMin;
 
 	const v11 = grid.lo[gridXIndex]?.[gridZIndex];
 	const v12 = grid.lo[gridXIndex]?.[gridZIndex + 1];
@@ -79,8 +79,8 @@ export function LLtoLO({ map, lat, lng }: { map: MapName } & LatLng): DcsCoords 
 
 	const gridLat = Math.floor(lat * 10);
 	const gridLng = Math.floor(lng * 10);
-	const gridLatIndex = gridLat - grid.minLat;
-	const gridLngIndex = gridLng - grid.minLng;
+	const gridLatIndex = gridLat - grid.bounds.latMin;
+	const gridLngIndex = gridLng - grid.bounds.lngMin;
 
 	const v11 = grid.ll[gridLatIndex]?.[gridLngIndex];
 	const v12 = grid.ll[gridLatIndex]?.[gridLngIndex + 1];

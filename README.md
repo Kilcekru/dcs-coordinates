@@ -132,5 +132,8 @@ Licensed under [MIT](https://github.com/Kilcekru/dcs-coordinates/blob/main/LICEN
 
 ## Changelog
 
+- v1.0.0
+	- increased boundaries for all maps
+
 - v0.1.0
 	- Initial Release

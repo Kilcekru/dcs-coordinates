@@ -11,10 +11,16 @@ export interface DcsCoords {
 export type MapName = "caucasus" | "normandy" | "persianGulf" | "southAtlantic" | "syria";
 
 export type Grid = {
-	minX: number;
-	minZ: number;
-	minLat: number;
-	minLng: number;
+	bounds: {
+		latMax: number;
+		latMin: number;
+		lngMax: number;
+		lngMin: number;
+		xMax: number;
+		xMin: number;
+		zMax: number;
+		zMin: number;
+	};
 	lo: Array<Array<[number, number]>>;
 	ll: Array<Array<[number, number]>>;
 };

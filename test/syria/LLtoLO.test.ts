@@ -5,51 +5,51 @@ import { LLtoLO } from "../../src";
 describe("syria", () => {
 	describe("LLtoLO", () => {
 		test("lat too small", () => {
-			expect(() => LLtoLO({ map: "syria", lat: 31.9999, lng: 35 })).toThrow(
+			expect(() => LLtoLO({ map: "syria", lat: 31.6999, lng: 35 })).toThrow(
 				new Error("Coordinates outside of acceptable area for syria")
 			);
 		});
 
 		test("lat too big", () => {
-			expect(() => LLtoLO({ map: "syria", lat: 37.6, lng: 35 })).toThrow(
+			expect(() => LLtoLO({ map: "syria", lat: 37.9, lng: 35 })).toThrow(
 				new Error("Coordinates outside of acceptable area for syria")
 			);
 		});
 
 		test("lng too small", () => {
-			expect(() => LLtoLO({ map: "syria", lat: 35, lng: 31.9999 })).toThrow(
+			expect(() => LLtoLO({ map: "syria", lat: 35, lng: 31.0999 })).toThrow(
 				new Error("Coordinates outside of acceptable area for syria")
 			);
 		});
 
 		test("lng too big", () => {
-			expect(() => LLtoLO({ map: "syria", lat: 35, lng: 40.4 })).toThrow(
+			expect(() => LLtoLO({ map: "syria", lat: 35, lng: 41 })).toThrow(
 				new Error("Coordinates outside of acceptable area for syria")
 			);
 		});
 
 		test("corner NE", () => {
-			const { x, z } = LLtoLO({ map: "syria", lat: 37.5999, lng: 40.3999 });
-			expect(x).toBeCloseTo(282_480, 0);
-			expect(z).toBeCloseTo(406_376, 0);
+			const { x, z } = LLtoLO({ map: "syria", lat: 37.8999, lng: 40.9999 });
+			expect(x).toBeCloseTo(316_729, 0);
+			expect(z).toBeCloseTo(458_634, 0);
 		});
 
 		test("corner SE", () => {
-			const { x, z } = LLtoLO({ map: "syria", lat: 32, lng: 40.3999 });
-			expect(x).toBeCloseTo(-338_574, 0);
-			expect(z).toBeCloseTo(415_035, 0);
+			const { x, z } = LLtoLO({ map: "syria", lat: 31.7, lng: 40.9999 });
+			expect(x).toBeCloseTo(-370_943, 0);
+			expect(z).toBeCloseTo(472_333, 0);
 		});
 
 		test("corner SW", () => {
-			const { x, z } = LLtoLO({ map: "syria", lat: 32, lng: 32 });
-			expect(x).toBeCloseTo(-317_938, 0);
-			expect(z).toBeCloseTo(-379_112, 0);
+			const { x, z } = LLtoLO({ map: "syria", lat: 31.7, lng: 31.1 });
+			expect(x).toBeCloseTo(-345_417, 0);
+			expect(z).toBeCloseTo(-466_884, 0);
 		});
 
 		test("corner NW", () => {
-			const { x, z } = LLtoLO({ map: "syria", lat: 37.5999, lng: 32 });
-			expect(x).toBeCloseTo(304_669, 0);
-			expect(z).toBeCloseTo(-335_499, 0);
+			const { x, z } = LLtoLO({ map: "syria", lat: 37.8999, lng: 31.1 });
+			expect(x).toBeCloseTo(344_385, 0);
+			expect(z).toBeCloseTo(-412_281, 0);
 		});
 
 		test("Ercan", () => {

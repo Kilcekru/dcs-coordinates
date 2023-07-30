@@ -4,87 +4,79 @@ do
 
 	local caucasus = {
 		name = "caucasus",
-		minX = -40,
-		maxX = 5,
-		minZ = 20,
-		maxZ = 93,
-		minLat = 409,
-		maxLat = 455,
-		minLng = 366,
-		maxLng = 460,
+		xMax = 10,
+		xMin = -45,
+		zMax = 100,
+		zMin = 15,
 	}
 
 	local normandy = {
 		name = "normandy",
-		minX = -13,
-		maxX = 25,
-		minZ = -15,
-		maxZ = 22,
-		minLat = 482,
-		maxLat = 518,
-		minLng = -24,
-		maxLng = 30,
+		xMax = 25,
+		xMin = -13,
+		zMax = 25,
+		zMin = -20,
 	}
 
 	local persianGulf = {
 		name = "persianGulf",
-		minX = -29,
-		maxX = 47,
-		minZ = -37,
-		maxZ = 17,
-		minLat = 234,
-		maxLat = 305,
-		minLng = 523,
-		maxLng = 580,
+		xMax = 55,
+		xMin = -37,
+		zMax = 25,
+		zMin = -45,
 	}
 
 	local southAtlantic = {
 		name = "southAtlantic",
-		minX = -50,
-		maxX = 35,
-		minZ = -110,
-		maxZ = 20,
-		minLat = -570,
-		maxLat = -481,
-		minLng = -769,
-		maxLng = -561,
+		xMax = 35,
+		xMin = -50,
+		zMax = 20,
+		zMin = -110,
 	}
 
 	local syria = {
 		name = "syria",
-		minX = -31,
-		maxX = 28,
-		minZ = -33,
-		maxZ = 40,
-		minLat = 320,
-		maxLat = 376,
-		minLng = 320,
-		maxLng = 404,
+		xMax = 31,
+		xMin = -34,
+		zMax = 45,
+		zMin = -41,
 	}
 
 	local function exportGrid()
-		local config = persianGulf -- change to correct table
+		local config = syria -- change to correct table
+
+		local latMin1, lngMin1 = coord.LOtoLL({x = 10000 * config.xMin, y = 0, z = 10000 * config.zMin})
+		local latMin2, lngMax1 = coord.LOtoLL({x = 10000 * config.xMin, y = 0, z = 10000 * config.zMax})
+		local latMax1, lngMin2 = coord.LOtoLL({x = 10000 * config.xMax, y = 0, z = 10000 * config.zMin})
+		local latMax2, lngMax2 = coord.LOtoLL({x = 10000 * config.xMax, y = 0, z = 10000 * config.zMax})
 
 		local grid = {
-			minX = config.minX,
-			minZ = config.minZ,
-			minLat = config.minLat,
-			minLng = config.minLng,
-			lo = {},
+			bounds = {
+				latMax = math.ceil(10 * math.max(latMax1, latMax2)),
+				latMin = math.floor(10 * math.min(latMin1, latMin2)),
+				lngMax = math.ceil(10 * math.max(lngMax1, lngMax2)),
+				lngMin = math.floor(10 * math.min(lngMin1, lngMin2)),
+				xMax = config.xMax,
+				xMin = config.xMin,
+				zMax = config.zMax,
+				zMin = config.zMin,
+			},
 			ll = {},
+			lo = {},
 		}
-		for x = config.minX, config.maxX do
+
+		for x = grid.bounds.xMin, grid.bounds.xMax do
 			local tmp = {}
-			for z = config.minZ, config.maxZ do
+			for z = grid.bounds.zMin, grid.bounds.zMax do
 				local lat, lng = coord.LOtoLL({x = 10000 * x, y = 0, z = 10000 * z})
 				table.insert(tmp, {lat, lng})
 			end
 			table.insert(grid.lo, tmp)
 		end
 
-		for lat = config.minLat, config.maxLat do
+		for lat = grid.bounds.latMin, grid.bounds.latMax do
 			local tmp = {}
-			for lng = config.minLng, config.maxLng do
+			for lng = grid.bounds.lngMin, grid.bounds.lngMax do
 				local vec = coord.LLtoLO(lat / 10, lng / 10)
 				table.insert(tmp, {vec.x, vec.z})
 			end

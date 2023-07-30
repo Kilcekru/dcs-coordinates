@@ -5,51 +5,51 @@ import { LLtoLO } from "../../src";
 describe("caucasus", () => {
 	describe("LLtoLO", () => {
 		test("lat too small", () => {
-			expect(() => LLtoLO({ map: "caucasus", lat: 40.8999, lng: 40 })).toThrow(
+			expect(() => LLtoLO({ map: "caucasus", lat: 40.2999, lng: 40 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("lat too big", () => {
-			expect(() => LLtoLO({ map: "caucasus", lat: 45.5, lng: 40 })).toThrow(
+			expect(() => LLtoLO({ map: "caucasus", lat: 46.0, lng: 40 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("lng too small", () => {
-			expect(() => LLtoLO({ map: "caucasus", lat: 42, lng: 36.5999 })).toThrow(
+			expect(() => LLtoLO({ map: "caucasus", lat: 42, lng: 35.8999 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("lng too big", () => {
-			expect(() => LLtoLO({ map: "caucasus", lat: 42, lng: 46 })).toThrow(
+			expect(() => LLtoLO({ map: "caucasus", lat: 42, lng: 47 })).toThrow(
 				new Error("Coordinates outside of acceptable area for caucasus")
 			);
 		});
 
 		test("corner NE", () => {
-			const { x, z } = LLtoLO({ map: "caucasus", lat: 45.4999, lng: 45.9999 });
-			expect(x).toBeCloseTo(123_243, 0);
-			expect(z).toBeCloseTo(915_918, 0);
+			const { x, z } = LLtoLO({ map: "caucasus", lat: 45.9999, lng: 46.9999 });
+			expect(x).toBeCloseTo(192_096, 0);
+			expect(z).toBeCloseTo(984_069, 0);
 		});
 
 		test("corner SE", () => {
-			const { x, z } = LLtoLO({ map: "caucasus", lat: 40.9, lng: 45.9999 });
-			expect(x).toBeCloseTo(-388_270, 0);
-			expect(z).toBeCloseTo(996_742, 0);
+			const { x, z } = LLtoLO({ map: "caucasus", lat: 40.3, lng: 46.9999 });
+			expect(x).toBeCloseTo(-441_863, 0);
+			expect(z).toBeCloseTo(1_092_132, 0);
 		});
 
 		test("corner SW", () => {
-			const { x, z } = LLtoLO({ map: "caucasus", lat: 40.9, lng: 36.6 });
-			expect(x).toBeCloseTo(-464_217, 0);
-			expect(z).toBeCloseTo(203_734, 0);
+			const { x, z } = LLtoLO({ map: "caucasus", lat: 40.3, lng: 35.9 });
+			expect(x).toBeCloseTo(-533_024, 0);
+			expect(z).toBeCloseTo(146_957, 0);
 		});
 
 		test("corner NW", () => {
-			const { x, z } = LLtoLO({ map: "caucasus", lat: 45.4999, lng: 36.6 });
-			expect(x).toBeCloseTo(46_677, 0);
-			expect(z).toBeCloseTo(181_736, 0);
+			const { x, z } = LLtoLO({ map: "caucasus", lat: 45.9999, lng: 35.9 });
+			expect(x).toBeCloseTo(100_011, 0);
+			expect(z).toBeCloseTo(125_033, 0);
 		});
 
 		test("Senaki-Kolkhi", () => {
