@@ -1,16 +1,31 @@
-import { Grid, MapName } from "../types";
-import caucasus from "./grid-caucasus.json";
-import normandy from "./grid-normandy.json";
-import persianGulf from "./grid-persianGulf.json";
-import sinai from "./grid-sinai.json";
-import southAtlantic from "./grid-southAtlantic.json";
-import syria from "./grid-syria.json";
+import { Theatre } from "../types";
+import Caucasus from "./grid-caucasus.json";
+import Normandy from "./grid-normandy.json";
+import PersianGulf from "./grid-persianGulf.json";
+import Sinai from "./grid-sinai.json";
+import SouthAtlantic from "./grid-southAtlantic.json";
+import Syria from "./grid-syria.json";
 
-export const data: Record<MapName, Grid> = {
-	caucasus: caucasus as Grid,
-	normandy: normandy as Grid,
-	persianGulf: persianGulf as Grid,
-	sinai: sinai as Grid,
-	southAtlantic: southAtlantic as Grid,
-	syria: syria as Grid,
+export const data: Record<Theatre, Grid> = {
+	Caucasus: Caucasus as Grid,
+	Normandy: Normandy as Grid,
+	PersianGulf: PersianGulf as Grid,
+	Sinai: Sinai as Grid,
+	SouthAtlantic: SouthAtlantic as Grid,
+	Syria: Syria as Grid,
+};
+
+type Grid = {
+	bounds: {
+		latMax: number;
+		latMin: number;
+		lngMax: number;
+		lngMin: number;
+		xMax: number;
+		xMin: number;
+		zMax: number;
+		zMin: number;
+	};
+	lo: Array<Array<[number, number]>>;
+	ll: Array<Array<[number, number]>>;
 };

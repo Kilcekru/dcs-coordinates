@@ -1,26 +1,23 @@
-export interface LatLng {
-	lat: number;
-	lng: number;
-}
+import { z } from "zod";
 
-export interface DcsCoords {
-	x: number;
-	z: number;
-}
+export const latLngSchema = z.object({ lat: z.number(), lng: z.number() });
+export type LatLng = z.TypeOf<typeof latLngSchema>;
 
-export type MapName = "caucasus" | "normandy" | "persianGulf" | "sinai" | "southAtlantic" | "syria";
+export const dcsCoordsSchema = z.object({ x: z.number(), z: z.number() });
+export type DcsCoords = z.TypeOf<typeof dcsCoordsSchema>;
 
-export type Grid = {
-	bounds: {
-		latMax: number;
-		latMin: number;
-		lngMax: number;
-		lngMin: number;
-		xMax: number;
-		xMin: number;
-		zMax: number;
-		zMin: number;
-	};
-	lo: Array<Array<[number, number]>>;
-	ll: Array<Array<[number, number]>>;
-};
+export const theatreSchema = z.enum(["Caucasus", "Normandy", "PersianGulf", "Sinai", "SouthAtlantic", "Syria"]);
+export type Theatre = z.TypeOf<typeof theatreSchema>;
+
+export const LOtoLLArgsSchema = dcsCoordsSchema.extend({
+	theatre: theatreSchema,
+});
+export type LOtoLLArgs = z.TypeOf<typeof LOtoLLArgsSchema>;
+
+export const LLtoLOArgsSchema = latLngSchema.extend({
+	theatre: theatreSchema,
+});
+export type LLtoLOArgs = z.TypeOf<typeof LLtoLOArgsSchema>;
+
+export const dmsSchema = z.object({ deg: z.number(), min: z.number(), sec: z.number() });
+export type DMS = z.TypeOf<typeof dmsSchema>;

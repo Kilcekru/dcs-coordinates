@@ -17,7 +17,7 @@ This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908
 - [How it works](#how-it-works)
 	- [Method](#method)
 	- [Accuracy](#accuracy)
-	- [Supported Maps](#supported-maps)
+	- [Supported Theatres](#supported-theatres)
 - [License](#license)
 - [Changelog](#changelog)
 
@@ -32,7 +32,7 @@ This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908
 import { LOtoLL } from "@kilcekru/dcs-coordinates";
 
 // convert coordinates of airport Senaki-Kolkhi
-const point = LOtoLL({ map: "caucasus", x: -281_782, z: 647_279 });
+const point = LOtoLL({ theatre: "Caucasus", x: -281_782, z: 647_279 });
 
 console.log(point);
 // { lat: 42.24084, lng: 42.04801 }
@@ -43,7 +43,7 @@ console.log(point);
 import { LLtoLO } from "@kilcekru/dcs-coordinates";
 
 // convert coordinates of airport Senaki-Kolkhi
-const point = LLtoLO({ map: "caucasus", lat: 42.24084, lng: 42.04801 });
+const point = LLtoLO({ theatre: "Caucasus", lat: 42.24084, lng: 42.04801 });
 
 console.log(point);
 // { x: -281_782, z: 647_279 }
@@ -53,8 +53,8 @@ console.log(point);
 
 ### LOtoLL
 ```typescript
-LOtoLL({map: MapName, x: number, z: number}): {lat: number, lng: number};
-type MapName = "caucasus" | "normandy" | "persianGulf" | "southAtlantic" | "syria";
+LOtoLL({theatre: Theatre, x: number, z: number}): {lat: number, lng: number};
+type Theatre = "Caucasus" | "Normandy" | "PersianGulf" | "Sinai" | "SouthAtlantic" | "Syria";
 ```
 
 Converts a point from DCS coordinates to Latitude / Longitude (decimal).\
@@ -62,8 +62,8 @@ The result is not perfect, see [Accuracy](#accuracy)
 
 ### LLtoLO
 ```typescript
-LLtoLO({map: MapName, lat: number, lng: number}): {x: number, z: number};
-type MapName = "caucasus" | "normandy" | "persianGulf" | "southAtlantic" | "syria";
+LLtoLO({theatre: Theatre, lat: number, lng: number}): {x: number, z: number};
+type Theatre = "Caucasus" | "Normandy" | "PersianGulf" | "Sinai" | "SouthAtlantic" | "Syria";
 ```
 
 Converts a point from Latitude / Longitude (decimal) to DCS coordinates.\
@@ -99,8 +99,8 @@ Converts Latitude or Longitude from degrees, minutes, seconds to a decimal value
 
 I do not know the exact way, Lat/Lng is mapped to internal coordinates in DCS.
 
-Because of this, a grid of coordinate points is extracted from each DCS Map.\
-The grid does not cover the whole map, but all airports are included.\
+Because of this, a grid of coordinate points is extracted from each DCS theatre.\
+The grid does not cover the whole theatre, but all airports are included.\
 Points outside the grid can not be converted, trying so will throw an Error.
 
 To convert a point the correct grid cell is selected and the result is interpolated from the cell corners.\
@@ -113,18 +113,19 @@ The deviation should be less than 10 meters for any given point.
 
 Also LOtoLL and LLtoLO use different lookup grids.
 If a point is converted from one coordinate system to the other and back it will not be exact.\
-The deviation for this is less than 5 meters for all maps.
+The deviation for this is less than 5 meters for all theatres.
 
-### Supported Maps
+### Supported Theatres
 
-Currently 5 Maps are supported:
+Currently 6 theatres are supported:
 - Caucasus
 - Normandy
 - Persian Gulf
+- Sinai
 - South Atlantic
 - Syria
 
-More maps might be covered in the future.
+More theatres might be covered in the future.
 
 ## License
 
@@ -132,8 +133,12 @@ Licensed under [MIT](https://github.com/Kilcekru/dcs-coordinates/blob/main/LICEN
 
 ## Changelog
 
+- v2.0.0
+	- renamed argument map to theatre
+	- added export for types and schemas
+
 - v1.0.0
-  - added sinai
+	- added sinai
 	- increased boundaries for all maps
 
 - v0.1.0

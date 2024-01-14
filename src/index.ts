@@ -1,26 +1,30 @@
+import { fromZodError } from "zod-validation-error";
+
 import { data } from "./data";
 import { bilinearInterpolation } from "./math";
-import { DcsCoords, LatLng, MapName } from "./types";
+import { DcsCoords, LatLng, LLtoLOArgs, LLtoLOArgsSchema, LOtoLLArgs, LOtoLLArgsSchema } from "./types";
 
+export * as Types from "./types";
 export * from "./utils";
 
 /**
  * Converts DCS coordinates to Lat / Lng (decimal)
  *
- * @param map Name of the map the coordinates are on
+ * @param theatre Name of the theatre the coordinates are on
  * @param x x coordinate of the point to convert
  * @param z z coordinate of the point to convert
  *
  * @returns Latitude and Longitude
  */
-export function LOtoLL({ map, x, z }: { map: MapName } & DcsCoords): LatLng {
-	const grid = data[map];
-	if (grid == undefined) {
-		throw new Error("Invalid map name");
+export function LOtoLL(args: LOtoLLArgs): LatLng {
+	const parsed = LOtoLLArgsSchema.safeParse(args);
+	if (!parsed.success) {
+		throw fromZodError(parsed.error, { prefix: "LOtoLL - Invalid args" });
 	}
+	const grid = data[args.theatre];
 
-	const gridX = Math.floor(x / 10000);
-	const gridZ = Math.floor(z / 10000);
+	const gridX = Math.floor(args.x / 10000);
+	const gridZ = Math.floor(args.z / 10000);
 	const gridXIndex = gridX - grid.bounds.xMin;
 	const gridZIndex = gridZ - grid.bounds.zMin;
 
@@ -30,14 +34,14 @@ export function LOtoLL({ map, x, z }: { map: MapName } & DcsCoords): LatLng {
 	const v22 = grid.lo[gridXIndex + 1]?.[gridZIndex + 1];
 
 	if (v11 == undefined || v12 == undefined || v21 == undefined || v22 == undefined) {
-		throw new Error(`Coordinates outside of acceptable area for ${map}`);
+		throw new Error(`Coordinates outside of acceptable area for theatre ${args.theatre}`);
 	}
 
 	const lat = bilinearInterpolation({
-		x,
+		x: args.x,
 		x1: 10000 * gridX,
 		x2: 10000 * (gridX + 1),
-		y: z,
+		y: args.z,
 		y1: 10000 * gridZ,
 		y2: 10000 * (gridZ + 1),
 		v11: v11[0],
@@ -47,10 +51,10 @@ export function LOtoLL({ map, x, z }: { map: MapName } & DcsCoords): LatLng {
 	});
 
 	const lng = bilinearInterpolation({
-		x,
+		x: args.x,
 		x1: 10000 * gridX,
 		x2: 10000 * (gridX + 1),
-		y: z,
+		y: args.z,
 		y1: 10000 * gridZ,
 		y2: 10000 * (gridZ + 1),
 		v11: v11[1],
@@ -65,20 +69,21 @@ export function LOtoLL({ map, x, z }: { map: MapName } & DcsCoords): LatLng {
 /**
  * Converts Lat / Long (decimal) to DCS coordinates
  *
- * @param map Name of the map the coordinates are on
+ * @param theatre Name of the theatre the coordinates are on
  * @param lat Latitude of the coordinates to convert
  * @param lng Longitude of the coordinates to convert
  *
  * @returns x and z coordinates
  */
-export function LLtoLO({ map, lat, lng }: { map: MapName } & LatLng): DcsCoords {
-	const grid = data[map];
-	if (grid == undefined) {
-		throw new Error("Invalid map name");
+export function LLtoLO(args: LLtoLOArgs): DcsCoords {
+	const parsed = LLtoLOArgsSchema.safeParse(args);
+	if (!parsed.success) {
+		throw fromZodError(parsed.error, { prefix: "LLtoLO - Invalid args" });
 	}
+	const grid = data[args.theatre];
 
-	const gridLat = Math.floor(lat * 10);
-	const gridLng = Math.floor(lng * 10);
+	const gridLat = Math.floor(args.lat * 10);
+	const gridLng = Math.floor(args.lng * 10);
 	const gridLatIndex = gridLat - grid.bounds.latMin;
 	const gridLngIndex = gridLng - grid.bounds.lngMin;
 
@@ -88,14 +93,14 @@ export function LLtoLO({ map, lat, lng }: { map: MapName } & LatLng): DcsCoords 
 	const v22 = grid.ll[gridLatIndex + 1]?.[gridLngIndex + 1];
 
 	if (v11 == undefined || v12 == undefined || v21 == undefined || v22 == undefined) {
-		throw new Error(`Coordinates outside of acceptable area for ${map}`);
+		throw new Error(`Coordinates outside of acceptable area for theatre ${args.theatre}`);
 	}
 
 	const x = bilinearInterpolation({
-		x: lat,
+		x: args.lat,
 		x1: gridLat / 10,
 		x2: (gridLat + 1) / 10,
-		y: lng,
+		y: args.lng,
 		y1: gridLng / 10,
 		y2: (gridLng + 1) / 10,
 		v11: v11[0],
@@ -105,10 +110,10 @@ export function LLtoLO({ map, lat, lng }: { map: MapName } & LatLng): DcsCoords 
 	});
 
 	const z = bilinearInterpolation({
-		x: lat,
+		x: args.lat,
 		x1: gridLat / 10,
 		x2: (gridLat + 1) / 10,
-		y: lng,
+		y: args.lng,
 		y1: gridLng / 10,
 		y2: (gridLng + 1) / 10,
 		v11: v11[1],
